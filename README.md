@@ -1,7 +1,5 @@
 Coding-lab_Group32
-
- Project Overview
-DevOps shell scripting solution for Kenyatta National Hospital's sensor data pipeline.
+Project Overview: Shell scripting solution for Kenyatta National Hospital's sensor data pipeline.
 
 Scripts
 - hospital_system.py: Core simulator engine (Heart Rate, Temperature, Water Usage)
