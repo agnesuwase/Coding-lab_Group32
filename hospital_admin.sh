@@ -41,6 +41,11 @@ initialize_system() {
 secure_data() {
     echo "Securing active_logs directory..."
     chmod 700 active_logs
+        if [ "$(stat -c '%a' active_logs)" = "700" ]; then
+        echo "Verification passed: active_logs is now owner-only (700)."
+    else
+        echo "Warning: permission change may not have applied correctly."
+    fi
     echo "Permissions updated. Only the owner can read and write in active_logs."
     echo "Current permissions:"
     ls -l -d active_logs
