@@ -1,3 +1,4 @@
+# Author: Favour - Member 1/2/3 contributions to hospital_admin.sh
 #!/bin/bash
 # hospital_admin.sh
 # KNH Digital Infrastructure - Permissions & Setup
@@ -9,6 +10,8 @@
 # Member 1 (The Architect)
 # ---------------------------------------------
 initialize_system() {
+
+	echo "All required directories are ready: active_logs, archived_logs, reports."
     echo "Initializing KNH data environment..."
 
     if [ ! -d "active_logs" ]; then
