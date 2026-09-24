@@ -11,3 +11,4 @@ archive_logs() {
     done
 }
 
+archive_logs
