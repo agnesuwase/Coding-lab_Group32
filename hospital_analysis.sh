@@ -13,6 +13,10 @@ process_vitals() {
         grep "CRITICAL" "$logfile" | awk -F' \\| ' '{print $1, "|", $2, "|", $3}' >> reports/critical_alerts.txt
     done
 
+    if [ "$(wc -l < reports/critical_alerts.txt)" -le 2 ]; then
+        echo "No CRITICAL readings found during this scan." >> reports/critical_alerts.txt
+    fi
+
     echo "Critical alerts saved to reports/critical_alerts.txt"
 }
 
