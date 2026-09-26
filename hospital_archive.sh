@@ -2,8 +2,9 @@
  
 archive_logs() {
     mkdir -p archived_logs
-    timestamp=$(date +"%Y%m%d_%H%M")
- 
+    shopt -s nullglob
+    timestamp=$(date +"%Y%m%d_%H%M%S")
+
     for file in active_logs/*.log; do
         name=$(basename "$file" .log)
         mv "$file" "archived_logs/${name}_${timestamp}.log"
