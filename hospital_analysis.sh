@@ -20,7 +20,17 @@ process_vitals() {
     echo "Critical alerts saved to reports/critical_alerts.txt"
 }
 
+# ---------------------------------------------
+# Member 6 (Facility Auditor): water_audit()
+# Averages ICU_WATER_RESERVE usage from the live water log
+# ---------------------------------------------
 water_audit() {
+    local logfile="active_logs/water_usage_log.log"
+    if [ ! -f "$logfile" ]; then
+        echo "Water log not found at $logfile. Start the engine first."
+        return 1
+    fi
+
     # Fields: $1=Timestamp $2=Device_ID $3=Usage (Liters/min) $4=Status
     # Collect reading count, average, min, max and HIGH_USAGE count in one awk pass
     read -r count avg min max high <<< "$(awk -F' \\| ' '
@@ -31,7 +41,12 @@ water_audit() {
             if ($4 == "HIGH_USAGE") high++
         }
         END { printf "%d %.2f %d %d %d", count, (count ? sum / count : 0), min, max, high }
-    ' active_logs/water_usage_log.log)"
+    ' "$logfile")"
+
+    if [ "$count" -eq 0 ]; then
+        echo "No ICU_WATER_RESERVE readings found in $logfile."
+        return 0
+    fi
 
     printf "\n========== KNH Water Audit ==========\n"
     printf "%-22s %s\n"          "Device:"         "ICU_WATER_RESERVE"
@@ -44,3 +59,4 @@ water_audit() {
 }
 
 process_vitals
+water_audit
