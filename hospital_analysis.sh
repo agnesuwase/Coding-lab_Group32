@@ -22,9 +22,25 @@ process_vitals() {
 
 water_audit() {
     # Fields: $1=Timestamp $2=Device_ID $3=Usage (Liters/min) $4=Status
-    avg=$(awk -F' \\| ' '$2 == "ICU_WATER_RESERVE" { sum += $3; count++ }
-        END { if (count > 0) printf "%.2f", sum / count }' active_logs/water_usage_log.log)
-    echo "Average ICU_WATER_RESERVE usage: $avg L/min"
+    # Collect reading count, average, min, max and HIGH_USAGE count in one awk pass
+    read -r count avg min max high <<< "$(awk -F' \\| ' '
+        $2 == "ICU_WATER_RESERVE" {
+            count++; sum += $3
+            if (count == 1 || $3 < min) min = $3
+            if (count == 1 || $3 > max) max = $3
+            if ($4 == "HIGH_USAGE") high++
+        }
+        END { printf "%d %.2f %d %d %d", count, (count ? sum / count : 0), min, max, high }
+    ' active_logs/water_usage_log.log)"
+
+    printf "\n========== KNH Water Audit ==========\n"
+    printf "%-22s %s\n"          "Device:"         "ICU_WATER_RESERVE"
+    printf "%-22s %d\n"          "Readings analysed:" "$count"
+    printf "%-22s %.2f L/min\n"  "Average usage:"  "$avg"
+    printf "%-22s %d L/min\n"    "Minimum usage:"  "$min"
+    printf "%-22s %d L/min\n"    "Maximum usage:"  "$max"
+    printf "%-22s %d\n"          "HIGH_USAGE alerts:" "$high"
+    printf "=====================================\n"
 }
 
 process_vitals
