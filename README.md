@@ -8,7 +8,7 @@ Scripts
 - hospital_archive.sh: Rotates and archives logs
 
 Group roles
-1. Agnes Uwase: GitHub repository setup, .gitignore, and this README
+1. Agnes Uwase: GitHub repository setup, .gitignore, this README, and resolved issues so the pull requests could be merged
 2. Mireille Umutoni: hospital_system.py, the data engine
 3. Favour Kebei: hospital_admin.sh (Member 1 initialize_system, Member 2 secure_data, Member 3 orchestration)
 4. Genereuse: process_vitals() in hospital_analysis.sh (critical heart-rate and temperature alerts)
