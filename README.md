@@ -8,11 +8,12 @@ Scripts
 - hospital_archive.sh: Rotates and archives logs
 
 Group roles
-- Agnes Uwase: GitHub repository, .gitignore, and this README
-- Mireille Umutoni: hospital_system.py, the data engine
-- Favour Kebei: hospital_admin.sh (initialize_system, secure_data, and script execution)
-- Genereuse: process_vitals() in hospital_analysis.sh (critical heart-rate and temperature alerts)
-- Regis Ndizihwe: water_audit() in hospital_analysis.sh, and hospital_archive.sh (log rotation)
+1. Agnes Uwase: GitHub repository setup, .gitignore, and this README
+2. Mireille Umutoni: hospital_system.py, the data engine
+3. Favour Kebei: hospital_admin.sh (Member 1 initialize_system, Member 2 secure_data, Member 3 orchestration)
+4. Genereuse: process_vitals() in hospital_analysis.sh (critical heart-rate and temperature alerts)
+5. Regis Ndizihwe: water_audit() in hospital_analysis.sh
+6. Regis Ndizihwe: hospital_archive.sh (log rotation)
 
 How to run
 1. Create the folders and lock down active_logs:
