@@ -20,4 +20,11 @@ process_vitals() {
     echo "Critical alerts saved to reports/critical_alerts.txt"
 }
 
+water_audit() {
+    # Fields: $1=Timestamp $2=Device_ID $3=Usage (Liters/min) $4=Status
+    avg=$(awk -F' \\| ' '$2 == "ICU_WATER_RESERVE" { sum += $3; count++ }
+        END { if (count > 0) printf "%.2f", sum / count }' active_logs/water_usage_log.log)
+    echo "Average ICU_WATER_RESERVE usage: $avg L/min"
+}
+
 process_vitals
