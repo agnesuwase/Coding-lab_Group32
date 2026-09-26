@@ -20,7 +20,7 @@ How to run
    bash hospital_admin.sh
 2. Start the sensor engine:
    python3 hospital_system.py start
-3. Scan heart-rate and temperature logs for CRITICAL rows. Results go to reports/critical_alerts.txt:
+3. Run the analysis menu and pick Critical Alerts, Water Audit, or Both. Critical rows are saved to reports/critical_alerts.txt:
    bash hospital_analysis.sh
 4. Move the current logs into archived_logs with a timestamp, then leave empty log files so the engine can keep writing:
    bash hospital_archive.sh

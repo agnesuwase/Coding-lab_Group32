@@ -1,5 +1,5 @@
-# Author: Favour - Member 1/2/3 contributions to hospital_admin.sh
 #!/bin/bash
+# Author: Favour - Member 1/2/3 contributions to hospital_admin.sh
 # hospital_admin.sh
 # KNH Digital Infrastructure - Permissions & Setup
 # Member 1: initialize_system()
@@ -11,7 +11,6 @@
 # ---------------------------------------------
 initialize_system() {
 
-	echo "All required directories are ready: active_logs, archived_logs, reports."
     echo "Initializing KNH data environment..."
 
     if [ ! -d "active_logs" ]; then
@@ -44,7 +43,7 @@ initialize_system() {
 secure_data() {
     echo "Securing active_logs directory..."
     chmod 700 active_logs
-        if [ "$(stat -c '%a' active_logs)" = "700" ]; then
+    if [ "$(stat -c '%a' active_logs 2>/dev/null || stat -f '%Lp' active_logs)" = "700" ]; then
         echo "Verification passed: active_logs is now owner-only (700)."
     else
         echo "Warning: permission change may not have applied correctly."

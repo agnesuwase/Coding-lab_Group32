@@ -58,5 +58,16 @@ water_audit() {
     printf "=====================================\n"
 }
 
-process_vitals
-water_audit
+# ---------------------------------------------
+# Interactive menu
+# ---------------------------------------------
+echo "KNH Analysis Menu"
+select choice in "Critical Alerts (process_vitals)" "Water Audit" "Both" "Exit"; do
+    case $choice in
+        "Critical Alerts (process_vitals)") process_vitals; break ;;
+        "Water Audit") water_audit; break ;;
+        "Both") process_vitals; water_audit; break ;;
+        "Exit") exit 0 ;;
+        *) echo "Invalid option, try again." ;;
+    esac
+done
